@@ -11,12 +11,28 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    
+    var movingBar = SKSpriteNode()
     
     override func didMove(to view: SKView) {
         
+        movingBar = self.childNode(withName: "movingBar") as! SKSpriteNode
         // Get label node from scene and store it for use later
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for touch in touches {
+            let location = touch.location(in: self)
+            movingBar.run(SKAction.moveTo(x: location.x, duration: 0.2))
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            movingBar.run(SKAction.moveTo(x: location.x, duration: 0))
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
