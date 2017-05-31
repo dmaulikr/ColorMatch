@@ -16,6 +16,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         movingBar = self.childNode(withName: "movingBar") as! SKSpriteNode
+        self.view?.allowsTransparency = true
+        self.view?.backgroundColor = UIColor.clear
+        self.scene?.backgroundColor = UIColor.clear
+        
         // Get label node from scene and store it for use later
         
     }

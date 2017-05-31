@@ -312,6 +312,7 @@
 				9255774F1EDDD8E700EA17A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
