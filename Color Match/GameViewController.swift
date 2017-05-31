@@ -10,15 +10,20 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+
+
 class GameViewController: UIViewController {
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let gradView = UIView(frame: self.view.bounds)
         let gradient = CAGradientLayer()
         
-        let rect = CGRect.init(x: Int(self.view.bounds.minX), y: Int(self.view.bounds.minY), width: Int(self.view.bounds.size.height), height: Int(self.view.bounds.size.width))
+        var rect = CGRect.init(x: Int(self.view.bounds.minX), y: Int(self.view.bounds.minY), width: Int(self.view.bounds.size.height), height: Int(self.view.bounds.size.width))
         
         gradient.frame = rect
         gradient.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
@@ -47,10 +52,23 @@ class GameViewController: UIViewController {
         self.view.addSubview(view)
         
         let frame = #imageLiteral(resourceName: "Frame")
-        var frameView = UIImageView.init(image: frame)
+        let frameView = UIImageView.init(image: frame)
         frameView.frame = self.view.bounds
         self.view.addSubview(frameView)
         
+        
+        
+        let status = UITextView.init()
+        status.text = "Color Match"
+        rect = CGRect.init(x: (Int(self.view.center.x)) - 50, y: 0, width: 100, height: 100)
+        status.frame = rect
+        status.textColor = UIColor.black
+        status.backgroundColor = UIColor.clear
+        
+        status.font = UIFont.init(name: "Avenir", size: 16)
+        self.view.addSubview(status)
+        let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        self.view.addConstraint(verticalCenter)
         
     }
 
