@@ -10,6 +10,35 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+extension CALayer {
+    
+    func colorOfPoint(point1:CGPoint) -> CGColor {
+        
+        var point = CGPoint.init(x: point1.x, y: point1.y)
+        
+        point.x = point1.x + GameViewController.theView!.bounds.maxX/2
+        var pixel: [CUnsignedChar] = [0, 0, 0, 0]
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        
+        let context = CGContext(data: &pixel, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        
+        context!.translateBy(x: -point.x, y: -point.y)
+        
+        self.render(in: context!)
+        
+        let red: CGFloat   = CGFloat(pixel[0]) / 255.0
+        let green: CGFloat = CGFloat(pixel[1]) / 255.0
+        let blue: CGFloat  = CGFloat(pixel[2]) / 255.0
+        let alpha: CGFloat = CGFloat(pixel[3]) / 255.0
+        
+        let color = UIColor(red:red, green: green, blue:blue, alpha:alpha)
+        
+        return color.cgColor
+    }
+}
+
 extension UIImage {
     func getPixelColor(pos: CGPoint) -> UIColor {
         
@@ -56,6 +85,8 @@ class GameViewController: UIViewController {
     
     static func getPixelColorAtPoint(point:CGPoint) -> UIColor{
         
+        
+        /*
         let pixel = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 4)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
@@ -73,6 +104,12 @@ class GameViewController: UIViewController {
             return color
         } else {
             return UIColor.red
+        }*/
+        
+        if theView != nil {
+            return UIColor.init(cgColor: theView!.layer.colorOfPoint(point1: point))
+        } else {
+            return UIColor.black
         }
         
     }
@@ -111,6 +148,7 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         self.view.addSubview(view)
+        
         
         let frame = #imageLiteral(resourceName: "Frame")
         let frameView = UIImageView.init(image: frame)
