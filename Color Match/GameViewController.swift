@@ -10,15 +10,76 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+extension UIImage {
+    func getPixelColor(pos: CGPoint) -> UIColor {
+        
+        let pixelData = self.cgImage!.dataProvider!.data
+        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+        
+        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+        
+        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+        
+        return UIColor(red: r, green: g, blue: b, alpha: a)
+    }
+}
 
+
+
+extension UIImage {
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: (image?.cgImage!)!)
+    }
+}
 
 class GameViewController: UIViewController {
 
+    static var theView: UIView? = nil
     
+    /*
+    static func getColorAtPoint(location: CGPoint) -> UIColor {
+        if theView != nil {
+            let tmpImage = UIImage.init(view: theView!)
+            return tmpImage.getPixelColor(pos: location)
+        } else {
+            return UIColor.black
+        }
+        
+    }*/
     
+    static func getPixelColorAtPoint(point:CGPoint) -> UIColor{
+        
+        let pixel = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 4)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: pixel, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        
+        context!.translateBy(x: -point.x, y: -point.y)
+        if theView != nil {
+            theView!.layer.render(in: context!)
+            let color:UIColor = UIColor(red: CGFloat(pixel[0])/255.0,
+                                        green: CGFloat(pixel[1])/255.0,
+                                        blue: CGFloat(pixel[2])/255.0,
+                                        alpha: CGFloat(pixel[3])/255.0)
+            
+            pixel.deallocate(capacity: 4)
+            return color
+        } else {
+            return UIColor.red
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GameViewController.theView = self.view
         
         let gradView = UIView(frame: self.view.bounds)
         let gradient = CAGradientLayer()
