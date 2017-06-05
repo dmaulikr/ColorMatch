@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9211B8EF1EE4FB6400E76B83 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9211B8EE1EE4FB6400E76B83 /* GameLogic.swift */; };
 		925577391EDDD8E700EA17A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925577381EDDD8E700EA17A7 /* AppDelegate.swift */; };
 		9255773B1EDDD8E700EA17A7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9255773A1EDDD8E700EA17A7 /* GameScene.sks */; };
 		9255773D1EDDD8E700EA17A7 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9255773C1EDDD8E700EA17A7 /* Actions.sks */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9211B8EE1EE4FB6400E76B83 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		925577351EDDD8E700EA17A7 /* Color Match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		925577381EDDD8E700EA17A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9255773A1EDDD8E700EA17A7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				925577451EDDD8E700EA17A7 /* Assets.xcassets */,
 				925577471EDDD8E700EA17A7 /* LaunchScreen.storyboard */,
 				9255774A1EDDD8E700EA17A7 /* Info.plist */,
+				9211B8EE1EE4FB6400E76B83 /* GameLogic.swift */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				9255773F1EDDD8E700EA17A7 /* GameScene.swift in Sources */,
 				925577411EDDD8E700EA17A7 /* GameViewController.swift in Sources */,
 				925577391EDDD8E700EA17A7 /* AppDelegate.swift in Sources */,
+				9211B8EF1EE4FB6400E76B83 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -159,12 +159,13 @@ class GameViewController: UIViewController {
         
         let status = UITextView.init()
         status.text = "Color Match"
-        rect = CGRect.init(x: (Int(self.view.center.x)) - 50, y: 0, width: 100, height: 100)
+        rect = CGRect.init(x: (Int(self.view.center.x)) - 55, y: 7, width: 110, height: 100)
         status.frame = rect
         status.textColor = UIColor.black
         status.backgroundColor = UIColor.clear
         
-        status.font = UIFont.init(name: "Avenir", size: 16)
+        status.font = UIFont.init(name: "Avenir-Heavy", size: 16)
+        
         self.view.addSubview(status)
         let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         self.view.addConstraint(verticalCenter)
