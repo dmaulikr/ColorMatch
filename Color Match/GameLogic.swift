@@ -13,6 +13,8 @@ import GameplayKit
 
 class GameLogic {
     
+    static var score: Int = 0
+    
     static var currentLocation: CGPoint = CGPoint.init(x: 0, y: 0)
     
     static func randomNumber(MIN: Int, MAX: Int)-> Int{
@@ -31,15 +33,23 @@ class GameLogic {
         
         print("xx: \(randx) yy: \(randy)\n\n")
         
-        currentLocation = CGPoint.init(x: 41, y: 559)
+        currentLocation = CGPoint.init(x: 49, y: 300)
         
         return currentLocation
     }
     
-    static func getNewColor(){
+    static func increaseScore(){
+        score += 1
+    }
+    
+    static func resetScore(){
+        score = 0
+    }
+    
+    static func getNewColor() -> UIColor{
         
         let newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
         print("new color: \(newColor)")
-        GameScene.setColor(to: newColor)
+        return newColor
     }
 }

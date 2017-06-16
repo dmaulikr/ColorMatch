@@ -19,9 +19,45 @@ class GameScene: SKScene {
     static var charColorR = SKSpriteNode()
     static var bgColorR = SKSpriteNode()
     
-    static func setColor(to color: UIColor){
-        charColorL.color = color
-        charColorR.color = color
+    
+    
+    static func setColor() -> SKAction{
+        let color = GameLogic.getNewColor()
+        return SKAction.colorize(with: color, colorBlendFactor: 1, duration: 4)
+    }
+    
+    /*
+     *   Transition between gradients.
+     *   Takes current score to determine difficulty of next gradient
+     *   The higher the score, the more colors in the gradient
+     */
+    static func changeGradients(){
+        let growth = SKAction.resize(toWidth: GameViewController.theView!.bounds.width * 2, duration: 1)
+        let shrink = SKAction.resize(toWidth: 15, duration: 1)
+        let newColor = GameLogic.getNewColor()
+        let whiteAni = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: 4)
+        let newColorAni = SKAction.colorize(with: newColor, colorBlendFactor: 1, duration: 4)
+        let pause = SKAction.wait(forDuration: 5)
+        charColorL.run(growth)
+        charColorR.run(growth)
+        charColorL.run(whiteAni)
+        charColorR.run(whiteAni)
+        
+        GameViewController.getNewGradient()
+        charColorR.run(pause, completion: {
+            charColorR.run(shrink)
+            charColorR.run(newColorAni)})
+        charColorL.run(pause, completion: {
+            charColorL.run(shrink)
+            charColorL.run(newColorAni)})
+        
+        
+    }
+    
+    
+    static func gotCorrectColor(){
+        GameLogic.increaseScore()
+        changeGradients()
     }
     
     override func didMove(to view: SKView) {
@@ -52,11 +88,8 @@ class GameScene: SKScene {
             GameScene.charColorR.run(SKAction.moveTo(x: location.x + 10, duration: 0))
             GameScene.bgColorR.run(SKAction.moveTo(x: location.x + 15, duration: 0))
             
-            /*
-            if (abs(location.x - GameLogic.currentLocation.x) < 10){
-                GameScene.bgColorR.color = UIColor.red
-                GameScene.bgColorL.color = UIColor.red
-            }*/
+            
+            check(location: location.x)
             
         }
     }
@@ -69,12 +102,16 @@ class GameScene: SKScene {
             GameScene.charColorR.run(SKAction.moveTo(x: location.x + 19, duration: 0))
             GameScene.bgColorR.run(SKAction.moveTo(x: location.x + 24, duration: 0))
             
-            /*
-            if (abs(location.x - GameLogic.currentLocation.x) < 10){
-                GameScene.bgColorR.color = UIColor.red
-                GameScene.bgColorL.color = UIColor.red
-            }*/
+            check(location: location.x)
             
+        }
+    }
+    
+    func check(location: CGFloat){
+        if (abs(location - GameLogic.currentLocation.x) < 10){
+            GameScene.gotCorrectColor()
+            GameScene.bgColorR.color = UIColor.red
+            GameScene.bgColorL.color = UIColor.red
         }
     }
     

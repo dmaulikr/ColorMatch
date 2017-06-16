@@ -70,8 +70,15 @@ extension UIImage {
 
 class GameViewController: UIViewController {
 
-    static var theView: UIView? = nil
+    static var colorList: [UIColor] = [
+        UIColor.i
+    ]
     
+    static var theView: UIView? = nil
+    static var gradView: UIView? = nil
+    static var gradient: CAGradientLayer? = nil
+    
+    static var rect: CGRect? = nil
     /*
     static func getColorAtPoint(location: CGPoint) -> UIColor {
         if theView != nil {
@@ -82,6 +89,18 @@ class GameViewController: UIViewController {
         }
         
     }*/
+    
+    static func getNewGradient(){
+        
+        
+        gradient!.frame = rect!
+        gradient!.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
+        gradient!.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+        gradient!.frame = theView!.bounds
+        
+        gradView!.layer.insertSublayer(gradient!, at: 0)
+        theView!.insertSubview(gradView!, at: 0)
+    }
     
     static func getPixelColorAtPoint(point:CGPoint) -> UIColor{
         
@@ -118,18 +137,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         GameViewController.theView = self.view
         
-        let gradView = UIView(frame: self.view.bounds)
-        let gradient = CAGradientLayer()
+        GameViewController.gradView = UIView(frame: GameViewController.theView!.bounds)
+        GameViewController.gradient = CAGradientLayer()
+        GameViewController.rect = CGRect.init(x: Int(GameViewController.theView!.bounds.minX), y: Int(GameViewController.theView!.bounds.minY), width: Int(GameViewController.theView!.bounds.size.height), height: Int(GameViewController.theView!.bounds.size.width))
         
-        var rect = CGRect.init(x: Int(self.view.bounds.minX), y: Int(self.view.bounds.minY), width: Int(self.view.bounds.size.height), height: Int(self.view.bounds.size.width))
-        
-        gradient.frame = rect
-        gradient.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
-        gradient.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
-        gradient.frame = self.view.bounds
-        
-        gradView.layer.insertSublayer(gradient, at: 0)
-        self.view.addSubview(gradView)
+        GameViewController.getNewGradient()
         
         let view: SKView = SKView(frame: self.view.bounds)
         
@@ -159,8 +171,8 @@ class GameViewController: UIViewController {
         
         let status = UITextView.init()
         status.text = "Color Match"
-        rect = CGRect.init(x: (Int(self.view.center.x)) - 55, y: 7, width: 110, height: 100)
-        status.frame = rect
+        GameViewController.rect = CGRect.init(x: (Int(self.view.center.x)) - 55, y: 7, width: 110, height: 100)
+        status.frame = GameViewController.rect!
         status.textColor = UIColor.black
         status.backgroundColor = UIColor.clear
         
