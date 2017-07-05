@@ -33,13 +33,15 @@ class GameLogic {
         
         print("xx: \(randx) yy: \(randy)\n\n")
         
-        currentLocation = CGPoint.init(x: 49, y: 300)
+        currentLocation = CGPoint.init(x: randx, y: randy)
         
         return currentLocation
     }
     
     static func increaseScore(){
         score += 1
+        GameViewController.updateScore()
+        //TODO: update score display
     }
     
     static func resetScore(){
@@ -48,8 +50,27 @@ class GameLogic {
     
     static func getNewColor() -> UIColor{
         
-        let newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+        var newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+        while newColor == UIColor.white || newColor == UIColor.black {
+            newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+        }
         print("new color: \(newColor)")
         return newColor
+    }
+    
+    static func resetTimer(){
+        
+    }
+    
+    
+    static func gotCorrectColor(){
+        increaseScore()
+        if (score % 5) == 0 {
+            GameScene.changeGradients()
+        }
+        
+        resetTimer()
+        GameScene.setColor()
+        
     }
 }

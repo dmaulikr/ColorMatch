@@ -21,9 +21,11 @@ class GameScene: SKScene {
     
     
     
-    static func setColor() -> SKAction{
+    static func setColor(){
         let color = GameLogic.getNewColor()
-        return SKAction.colorize(with: color, colorBlendFactor: 1, duration: 4)
+        let newColorAction = SKAction.colorize(with: color, colorBlendFactor: 1, duration: 4)
+        charColorR.run(newColorAction)
+        charColorL.run(newColorAction)
     }
     
     /*
@@ -55,11 +57,6 @@ class GameScene: SKScene {
     }
     
     
-    static func gotCorrectColor(){
-        GameLogic.increaseScore()
-        changeGradients()
-    }
-    
     override func didMove(to view: SKView) {
         
         
@@ -68,7 +65,7 @@ class GameScene: SKScene {
         GameScene.charColorR = self.childNode(withName: "charColorR") as! SKSpriteNode
         GameScene.bgColorR = self.childNode(withName: "bgColorR") as! SKSpriteNode
         
-        //GameLogic.getNewColor()
+        GameLogic.getNewColor()
         
         self.view?.allowsTransparency = true
         self.view?.backgroundColor = UIColor.clear
@@ -109,9 +106,9 @@ class GameScene: SKScene {
     
     func check(location: CGFloat){
         if (abs(location - GameLogic.currentLocation.x) < 10){
-            GameScene.gotCorrectColor()
-            GameScene.bgColorR.color = UIColor.red
-            GameScene.bgColorL.color = UIColor.red
+            GameLogic.gotCorrectColor()
+            //GameScene.bgColorR.color = UIColor.red
+            //GameScene.bgColorL.color = UIColor.red
         }
     }
     

@@ -68,15 +68,32 @@ extension UIImage {
     }
 }
 
+extension Dictionary {
+    func getRandomItem() -> Element{
+        let index: Int = Int(arc4random_uniform(UInt32(self.count)))
+        let randomVal = Array(self)[index] // 123 or 234 or 345
+        return randomVal
+    }
+}
+
 class GameViewController: UIViewController {
 
-    static var colorList: [UIColor] = [
-        UIColor.i
+    
+    static var colorList: [String:UIColor] = [
+        "purple":UIColor(red:0.63, green:0.36, blue:0.95, alpha:1.0),
+        "blue":UIColor(red:0.36, green:0.43, blue:0.95, alpha:1.0),
+        "pink":UIColor(red:0.95, green:0.36, blue:0.91, alpha:1.0),
+        "red":UIColor(red:0.95, green:0.36, blue:0.38, alpha:1.0),
+        "orange":UIColor(red:0.95, green:0.56, blue:0.36, alpha:1.0),
+        "yellow":UIColor(red:0.95, green:0.92, blue:0.36, alpha:1.0),
+        "green":UIColor(red:0.38, green:0.95, blue:0.36, alpha:1.0),
+        "lblue":UIColor(red:0.36, green:0.92, blue:0.95, alpha:1.0)
     ]
     
     static var theView: UIView? = nil
     static var gradView: UIView? = nil
     static var gradient: CAGradientLayer? = nil
+    static var score = UITextView.init()
     
     static var rect: CGRect? = nil
     /*
@@ -94,7 +111,7 @@ class GameViewController: UIViewController {
         
         
         gradient!.frame = rect!
-        gradient!.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
+        gradient!.colors = [colorList.getRandomItem().value.cgColor, colorList.getRandomItem().value.cgColor]
         gradient!.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
         gradient!.frame = theView!.bounds
         
@@ -171,21 +188,31 @@ class GameViewController: UIViewController {
         
         let status = UITextView.init()
         status.text = "Color Match"
+        GameViewController.score.text = "0"
         GameViewController.rect = CGRect.init(x: (Int(self.view.center.x)) - 55, y: 7, width: 110, height: 100)
         status.frame = GameViewController.rect!
+        GameViewController.score.frame = CGRect.init(x: 10, y: 7, width: 50, height: 50)
+        GameViewController.score.textColor = UIColor.black
+        GameViewController.score.backgroundColor = UIColor.clear
+        GameViewController.score.font = UIFont.init(name: "Avenir-Heavy", size: 16)
         status.textColor = UIColor.black
         status.backgroundColor = UIColor.clear
         
         status.font = UIFont.init(name: "Avenir-Heavy", size: 16)
         
+        self.view.addSubview(GameViewController.score)
         self.view.addSubview(status)
         let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         self.view.addConstraint(verticalCenter)
         
     }
+    
+    static func updateScore(){
+        score.text = "\(GameLogic.score)"
+    }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
