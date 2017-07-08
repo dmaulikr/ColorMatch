@@ -13,17 +13,20 @@ import Foundation
 
 class GameScene: SKScene {
     
+    let charPadding: CGFloat = 10
+    let bgPadding:CGFloat = 15
     
     static var charColorL = SKSpriteNode()
     static var bgColorL = SKSpriteNode()
     static var charColorR = SKSpriteNode()
     static var bgColorR = SKSpriteNode()
+    static var positionBar = SKSpriteNode()
     
     
     
     static func setColor(){
         let color = GameLogic.getNewColor()
-        let newColorAction = SKAction.colorize(with: color, colorBlendFactor: 1, duration: 4)
+        let newColorAction = SKAction.colorize(with: color, colorBlendFactor: 1, duration: 1)
         charColorR.run(newColorAction)
         charColorL.run(newColorAction)
     }
@@ -64,8 +67,9 @@ class GameScene: SKScene {
         GameScene.bgColorL = self.childNode(withName: "bgColorL") as! SKSpriteNode
         GameScene.charColorR = self.childNode(withName: "charColorR") as! SKSpriteNode
         GameScene.bgColorR = self.childNode(withName: "bgColorR") as! SKSpriteNode
+        GameScene.positionBar = self.childNode(withName: "position") as! SKSpriteNode
         
-        GameLogic.getNewColor()
+        GameScene.setColor()
         
         self.view?.allowsTransparency = true
         self.view?.backgroundColor = UIColor.clear
@@ -80,13 +84,13 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             
-            GameScene.charColorL.run(SKAction.moveTo(x: location.x - 10, duration: 0))
-            GameScene.bgColorL.run(SKAction.moveTo(x: location.x - 15, duration: 0))
-            GameScene.charColorR.run(SKAction.moveTo(x: location.x + 10, duration: 0))
-            GameScene.bgColorR.run(SKAction.moveTo(x: location.x + 15, duration: 0))
+            GameScene.charColorL.run(SKAction.moveTo(x: location.x - charPadding, duration: 0))
+            GameScene.bgColorL.run(SKAction.moveTo(x: location.x - bgPadding, duration: 0))
+            GameScene.charColorR.run(SKAction.moveTo(x: location.x + charPadding, duration: 0))
+            GameScene.bgColorR.run(SKAction.moveTo(x: location.x + bgPadding, duration: 0))
             
             
-            check(location: location.x)
+            
             
         }
     }
@@ -94,21 +98,35 @@ class GameScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            GameScene.charColorL.run(SKAction.moveTo(x: location.x - 19, duration: 0))
-            GameScene.bgColorL.run(SKAction.moveTo(x: location.x - 24, duration: 0))
-            GameScene.charColorR.run(SKAction.moveTo(x: location.x + 19, duration: 0))
-            GameScene.bgColorR.run(SKAction.moveTo(x: location.x + 24, duration: 0))
+            GameScene.charColorL.run(SKAction.moveTo(x: location.x - charPadding, duration: 0))
+            GameScene.bgColorL.run(SKAction.moveTo(x: location.x - bgPadding, duration: 0))
+            GameScene.charColorR.run(SKAction.moveTo(x: location.x + charPadding, duration: 0))
+            GameScene.bgColorR.run(SKAction.moveTo(x: location.x + bgPadding, duration: 0))
             
-            check(location: location.x)
+            
             
         }
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            check(location: location.x)
+        }
+    }
+    
     func check(location: CGFloat){
-        if (abs(location - GameLogic.currentLocation.x) < 10){
+        let distance = location - GameLogic.currentLocation.x
+        if (abs(distance) < 20){
             GameLogic.gotCorrectColor()
             //GameScene.bgColorR.color = UIColor.red
             //GameScene.bgColorL.color = UIColor.red
+        } else if distance < 0 {
+            //GameScene.bgColorL.color = GameViewController.colorList["green"]!
+            //GameScene.bgColorR.color = UIColor.white
+        } else {
+            //GameScene.bgColorR.color = GameViewController.colorList["green"]!
+            //GameScene.bgColorL.color = UIColor.white
         }
     }
     

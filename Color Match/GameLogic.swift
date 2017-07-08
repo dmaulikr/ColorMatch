@@ -35,6 +35,8 @@ class GameLogic {
         
         currentLocation = CGPoint.init(x: randx, y: randy)
         
+        GameScene.positionBar.run(SKAction.move(to: currentLocation, duration: 1))
+        
         return currentLocation
     }
     
@@ -49,12 +51,14 @@ class GameLogic {
     }
     
     static func getNewColor() -> UIColor{
-        
+        let white = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        let owhite = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         var newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
-        while newColor == UIColor.white || newColor == UIColor.black {
+        while newColor == white || newColor == owhite || newColor == UIColor.black {
             newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
         }
         print("new color: \(newColor)")
+        print("white: \(white)")
         return newColor
     }
     
