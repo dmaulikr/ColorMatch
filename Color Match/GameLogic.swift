@@ -23,13 +23,18 @@ class GameLogic {
     
     static func getNewLocation() -> CGPoint {
     
-        let intpx = randomNumber(MIN: 0, MAX: 101)
-        let intpy = randomNumber(MIN: 0, MAX: 101)
+        let intpx:Double = Double(randomNumber(MIN: 0, MAX: 101)) / 100.0
+        let intpy:Double = Double(randomNumber(MIN: 0, MAX: 101)) / 100.0
+        let intpositive = randomNumber(MIN: 0, MAX: 2)
         
         print("px: \(intpx) py: \(intpy)\n\n")
         
-        let randx: Int = Int(GameViewController.theView!.frame.maxX) * intpx / 100
-        let randy: Int = Int(GameViewController.theView!.frame.maxY) * intpy / 100
+        var randx: Double = Double(GameViewController.theView!.bounds.maxX) * intpx
+        let randy: Double = Double(GameViewController.theView!.bounds.maxY) * intpy
+        
+        if intpositive == 0 {
+            randx *= -1
+        }
         
         print("xx: \(randx) yy: \(randy)\n\n")
         
@@ -56,9 +61,10 @@ class GameLogic {
         var newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
         while newColor == white || newColor == owhite || newColor == UIColor.black {
             newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+            print("new color: \(newColor)")
+            print("white: \(white)")
         }
-        print("new color: \(newColor)")
-        print("white: \(white)")
+        print("hello\n")
         return newColor
     }
     

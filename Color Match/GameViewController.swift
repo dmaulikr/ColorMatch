@@ -202,8 +202,8 @@ class GameViewController: UIViewController {
         
         self.view.addSubview(GameViewController.score)
         self.view.addSubview(status)
-        let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        self.view.addConstraint(verticalCenter)
+        //let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        //self.view.addConstraint(verticalCenter)
         
     }
     
