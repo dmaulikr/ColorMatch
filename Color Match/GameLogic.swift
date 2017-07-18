@@ -79,10 +79,12 @@ class GameLogic {
         increaseScore()
         if (score % 5) == 0 {
             GameScene.changeGradients()
+        } else {
+            GameScene.setColor()
         }
         
         resetTimer()
-        GameScene.setColor()
+        
         
     }
 }

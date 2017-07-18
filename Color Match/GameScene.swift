@@ -41,20 +41,29 @@ class GameScene: SKScene {
         let shrink = SKAction.resize(toWidth: 15, duration: 1)
         let newColor = GameLogic.getNewColor()
         let whiteAni = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: 4)
-        let newColorAni = SKAction.colorize(with: newColor, colorBlendFactor: 1, duration: 4)
+        //let newColorAni = SKAction.colorize(with: newColor, colorBlendFactor: 1, duration: 4)
         let pause = SKAction.wait(forDuration: 5)
-        charColorL.run(growth)
+        /*charColorL.run(growth)
         charColorR.run(growth)
         charColorL.run(whiteAni)
-        charColorR.run(whiteAni)
+        charColorR.run(whiteAni)*/
         
         GameViewController.getNewGradient()
+        setColor()
+        /*
         charColorR.run(pause, completion: {
-            charColorR.run(shrink)
-            charColorR.run(newColorAni)})
+            charColorR.run(shrink, completion: {
+                
+                    setColor()
+                })
+            })
         charColorL.run(pause, completion: {
-            charColorL.run(shrink)
-            charColorL.run(newColorAni)})
+            charColorL.run(shrink, completion: {
+                
+                    setColor()
+                
+                })
+            })*/
         
         
     }
