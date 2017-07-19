@@ -24,8 +24,8 @@ class GameLogic {
     
     static func getNewLocation() -> CGPoint {
     
-        let intpx:Double = Double(randomNumber(MIN: 0, MAX: 98)) / 100.0
-        let intpy:Double = Double(randomNumber(MIN: 0, MAX: 98)) / 100.0
+        let intpx:Double = Double(randomNumber(MIN: 0, MAX: 45)) / 100.0
+        let intpy:Double = Double(randomNumber(MIN: 0, MAX: 95)) / 100.0
         let intpositive = randomNumber(MIN: 0, MAX: 2)
         
         print("px: \(intpx) py: \(intpy)\n\n")
@@ -39,8 +39,14 @@ class GameLogic {
         
         print("xx: \(randx) yy: \(randy)\n\n")
         
-        colorLocation = CGPoint.init(x: randx, y: randy)
-        currentLocation = CGPoint.init(x: randx * 2.1, y: randy)
+        if abs(randx - Double(currentLocation.x)) < 100 {
+            colorLocation = getNewLocation()
+        } else {
+            colorLocation = CGPoint.init(x: randx, y: randy)
+            currentLocation = CGPoint.init(x: randx * 2.1, y: randy)
+        }
+        
+        
         
         GameScene.positionBar.run(SKAction.move(to: currentLocation, duration: 1))
         
