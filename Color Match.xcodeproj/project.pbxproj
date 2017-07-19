@@ -16,6 +16,7 @@
 		925577441EDDD8E700EA17A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925577421EDDD8E700EA17A7 /* Main.storyboard */; };
 		925577461EDDD8E700EA17A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925577451EDDD8E700EA17A7 /* Assets.xcassets */; };
 		925577491EDDD8E700EA17A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925577471EDDD8E700EA17A7 /* LaunchScreen.storyboard */; };
+		928929261F1EF666008A6A59 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928929251F1EF666008A6A59 /* StartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		925577451EDDD8E700EA17A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		925577481EDDD8E700EA17A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9255774A1EDDD8E700EA17A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		928929251F1EF666008A6A59 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				925577471EDDD8E700EA17A7 /* LaunchScreen.storyboard */,
 				9255774A1EDDD8E700EA17A7 /* Info.plist */,
 				9211B8EE1EE4FB6400E76B83 /* GameLogic.swift */,
+				928929251F1EF666008A6A59 /* StartViewController.swift */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928929261F1EF666008A6A59 /* StartViewController.swift in Sources */,
 				9255773F1EDDD8E700EA17A7 /* GameScene.swift in Sources */,
 				925577411EDDD8E700EA17A7 /* GameViewController.swift in Sources */,
 				925577391EDDD8E700EA17A7 /* AppDelegate.swift in Sources */,

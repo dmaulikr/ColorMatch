@@ -109,9 +109,16 @@ class GameViewController: UIViewController {
     
     static func getNewGradient(){
         
+        var color1 = colorList.getRandomItem().value.cgColor
+        var color2 = colorList.getRandomItem().value.cgColor
+        
+        while color1 == color2 {
+            color1 = colorList.getRandomItem().value.cgColor
+            color2 = colorList.getRandomItem().value.cgColor
+        }
         
         gradient!.frame = rect!
-        gradient!.colors = [colorList.getRandomItem().value.cgColor, colorList.getRandomItem().value.cgColor]
+        gradient!.colors = [color1, color2]
         gradient!.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
         gradient!.frame = theView!.bounds
         

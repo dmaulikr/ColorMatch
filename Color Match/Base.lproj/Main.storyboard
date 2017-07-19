@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Start View Controller-->
         <scene sceneID="ph6-3Y-Dmn">
             <objects>
-                <viewController id="B6m-H0-MYx" sceneMemberID="viewController">
+                <viewController id="B6m-H0-MYx" customClass="StartViewController" customModule="Color_Match" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yaE-er-rfy"/>
                         <viewControllerLayoutGuide type="bottom" id="5yD-dz-MUT"/>
@@ -18,28 +18,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T1-GU-zMX">
-                                <frame key="frameInset" minX="170" minY="313" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="CfT-0z-Dkk"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quick Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgL-bk-i4R">
-                                <frame key="frameInset" minX="131" minY="141" width="112" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Color" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgL-bk-i4R">
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="33"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiF-yA-hqa"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9T1-GU-zMX">
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startPressed:" destination="B6m-H0-MYx" eventType="touchUpInside" id="OMn-zm-uwd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fiF-yA-hqa" firstAttribute="centerX" secondItem="bZV-Tu-Zh8" secondAttribute="centerX" id="AJn-R6-rA3"/>
+                            <constraint firstItem="fiF-yA-hqa" firstAttribute="centerY" secondItem="bZV-Tu-Zh8" secondAttribute="centerY" constant="-49.5" id="SIN-0M-hn8"/>
+                            <constraint firstItem="9T1-GU-zMX" firstAttribute="centerX" secondItem="bZV-Tu-Zh8" secondAttribute="centerX" id="XHR-gf-5Za"/>
+                            <constraint firstItem="lgL-bk-i4R" firstAttribute="centerX" secondItem="bZV-Tu-Zh8" secondAttribute="centerX" id="eyG-Ez-ene"/>
+                            <constraint firstItem="9T1-GU-zMX" firstAttribute="top" secondItem="lgL-bk-i4R" secondAttribute="bottom" constant="222.5" id="gsi-DO-AgZ"/>
+                            <constraint firstItem="lgL-bk-i4R" firstAttribute="top" secondItem="yaE-er-rfy" secondAttribute="bottom" constant="112" id="oCx-sA-9Qt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="selector" destination="fiF-yA-hqa" id="u1g-ru-UdG"/>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="normal" id="dQ4-yO-zvz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHO-DE-WSe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-599.20000000000005" y="16.641679160419791"/>
+            <point key="canvasLocation" x="-977" y="-23"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -64,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="359" y="0.0"/>
+            <point key="canvasLocation" x="-284" y="-24"/>
         </scene>
     </scenes>
 </document>
