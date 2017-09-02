@@ -94,6 +94,7 @@ class GameViewController: UIViewController {
     static var gradView: UIView? = nil
     static var gradient: CAGradientLayer? = nil
     static var score = UITextView.init()
+    static var highScore = UITextView.init()
     
     static var rect: CGRect? = nil
     /*
@@ -205,9 +206,16 @@ class GameViewController: UIViewController {
         status.textColor = UIColor.black
         status.backgroundColor = UIColor.clear
         
+        GameViewController.highScore.text = "\(GameLogic.getHighScore(for: "highScoreNormal"))"
+        GameViewController.highScore.frame = CGRect.init(x: (Int(self.view.bounds.maxX)) - 30, y: 7, width: 50, height: 50)
+        GameViewController.highScore.textColor = UIColor.black
+        GameViewController.highScore.backgroundColor = UIColor.clear
+        GameViewController.highScore.font = UIFont.init(name: "Avenir-Heavy", size: 16)
+        
         status.font = UIFont.init(name: "Avenir-Heavy", size: 16)
         
         self.view.addSubview(GameViewController.score)
+        self.view.addSubview(GameViewController.highScore)
         self.view.addSubview(status)
         //let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         //self.view.addConstraint(verticalCenter)
@@ -216,6 +224,10 @@ class GameViewController: UIViewController {
     
     static func updateScore(){
         score.text = "\(GameLogic.score)"
+        if GameLogic.score > GameLogic.highScore {
+            GameLogic.setHighScore(for: "highScoreNormal")
+            highScore.text = "\(GameLogic.highScore)"
+        }
     }
 
     override var shouldAutorotate: Bool {

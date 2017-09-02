@@ -18,6 +18,8 @@ class GameLogic {
     static var currentLocation: CGPoint = CGPoint.init(x: 0, y: 0)
     static var colorLocation: CGPoint = CGPoint(x:0, y:0)
     
+    static var highScore: Int = UserDefaults().integer(forKey: "highScoreNormal")
+    
     static func randomNumber(MIN: Int, MAX: Int)-> Int{
         return Int(arc4random_uniform(UInt32(MAX)) + UInt32(MIN));
     }
@@ -47,8 +49,8 @@ class GameLogic {
         }
         
         
-        
-        GameScene.positionBar.run(SKAction.move(to: currentLocation, duration: 1))
+        // Test bar for location
+        //GameScene.positionBar.run(SKAction.move(to: currentLocation, duration: 1))
         
         return colorLocation
     }
@@ -92,5 +94,31 @@ class GameLogic {
         resetTimer()
         
         
+    }
+    
+    /*
+     Get the high score for the specified gamemode.
+     Possible gamemodes: gameModeNormal, gameModeSpeedy, gameModeExpert
+     */
+    static func getHighScore(for gameModeKey: String) -> Int{
+        return GameLogic.highScore
+    }
+    
+    /*
+     Save the current score as the high score in the user defaults
+     Requires the necessary game mode key in order to update the proper gamemode's high score
+    */
+    static func setHighScore(for gameModeKey: String) {
+        UserDefaults.standard.set(GameLogic.score, forKey: gameModeKey)
+        highScore += 1
+    }
+    
+    /*
+     Reset the high score to 0
+     Requires the necessary game mode key in order to update the proper gamemode's high score
+     */
+    static func resetHighScore(for gameModeKey: String) {
+        let zeroScore = 0
+        UserDefaults.standard.set(zeroScore, forKey: gameModeKey)
     }
 }
