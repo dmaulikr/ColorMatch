@@ -76,6 +76,7 @@ class GameScene: SKScene {
         GameScene.bgColorL = self.childNode(withName: "bgColorL") as! SKSpriteNode
         GameScene.charColorR = self.childNode(withName: "charColorR") as! SKSpriteNode
         GameScene.bgColorR = self.childNode(withName: "bgColorR") as! SKSpriteNode
+        // Uncomment to have bug testing position bar
         GameScene.positionBar = self.childNode(withName: "position") as! SKSpriteNode
         
         GameScene.setColor()

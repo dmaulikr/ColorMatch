@@ -10,6 +10,9 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+// Extension of CALayer to get the color of specified point
+// point1: location to find for color
+// returns CGColor of specified color
 extension CALayer {
     
     func colorOfPoint(point1:CGPoint) -> CGColor {
@@ -38,6 +41,7 @@ extension CALayer {
         return color.cgColor
     }
 }
+
 
 extension UIImage {
     func getPixelColor(pos: CGPoint) -> UIColor {
@@ -95,6 +99,7 @@ class GameViewController: UIViewController {
     static var gradient: CAGradientLayer? = nil
     static var score = UITextView.init()
     static var highScore = UITextView.init()
+    static var progressBar = UIProgressView.init()
     
     static var rect: CGRect? = nil
     /*
@@ -108,6 +113,8 @@ class GameViewController: UIViewController {
         
     }*/
     
+    // Selects 2 new colors to create a new gradient
+    // TODO: Make functional for 2x2 gradients
     static func getNewGradient(){
         
         var color1 = colorList.getRandomItem().value.cgColor
@@ -127,7 +134,10 @@ class GameViewController: UIViewController {
         theView!.insertSubview(gradView!, at: 0)
     }
     
-    static func getPixelColorAtPoint(point:CGPoint) -> UIColor{
+    
+    // Gets the color of a pixel at a certain location
+    // at point: CGPoint, location
+    static func getPixelColor(at point:CGPoint) -> UIColor{
         
         
         /*
@@ -212,16 +222,27 @@ class GameViewController: UIViewController {
         GameViewController.highScore.backgroundColor = UIColor.clear
         GameViewController.highScore.font = UIFont.init(name: "Avenir-Heavy", size: 16)
         
+        // Add progress bar
+        GameViewController.progressBar.progressTintColor = UIColor.red
+        GameViewController.progressBar.center = CGPoint.init(x: self.view.center.x, y: 10)
+        GameViewController.progressBar.setProgress(0.9, animated: true)
+        GameViewController.progressBar.frame = CGRect.init(x: 10, y: 36, width: self.view.frame.width - 20, height: 400)
+        
+        
         status.font = UIFont.init(name: "Avenir-Heavy", size: 16)
         
         self.view.addSubview(GameViewController.score)
         self.view.addSubview(GameViewController.highScore)
         self.view.addSubview(status)
+        self.view.addSubview(GameViewController.progressBar)
         //let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         //self.view.addConstraint(verticalCenter)
         
     }
     
+    
+    // Updates the score
+    // Compares if the score is larger than the saved high score. Replaces it if so
     static func updateScore(){
         score.text = "\(GameLogic.score)"
         if GameLogic.score > GameLogic.highScore {

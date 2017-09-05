@@ -14,6 +14,7 @@ import GameplayKit
 class GameLogic {
     
     static var score: Int = 0
+    static var timer = Timer()
     
     static var currentLocation: CGPoint = CGPoint.init(x: 0, y: 0)
     static var colorLocation: CGPoint = CGPoint(x:0, y:0)
@@ -61,6 +62,12 @@ class GameLogic {
         //TODO: update score display
     }
     
+    
+    static func startTimer(for time: Int){
+        
+        
+    }
+    
     static func resetScore(){
         score = 0
     }
@@ -68,9 +75,9 @@ class GameLogic {
     static func getNewColor() -> UIColor{
         let white = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         let owhite = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        var newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+        var newColor = GameViewController.getPixelColor(at: getNewLocation())
         while newColor == white || newColor == owhite || newColor == UIColor.black {
-            newColor = GameViewController.getPixelColorAtPoint(point: getNewLocation())
+            newColor = GameViewController.getPixelColor(at: getNewLocation())
             print("new color: \(newColor)")
             print("white: \(white)")
         }
