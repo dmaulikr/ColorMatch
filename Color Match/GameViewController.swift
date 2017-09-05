@@ -225,7 +225,7 @@ class GameViewController: UIViewController {
         // Add progress bar
         GameViewController.progressBar.progressTintColor = UIColor.red
         GameViewController.progressBar.center = CGPoint.init(x: self.view.center.x, y: 10)
-        GameViewController.progressBar.setProgress(0.9, animated: true)
+        GameViewController.progressBar.setProgress(1.0, animated: true)
         GameViewController.progressBar.frame = CGRect.init(x: 10, y: 36, width: self.view.frame.width - 20, height: 400)
         
         

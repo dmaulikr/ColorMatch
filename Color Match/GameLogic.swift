@@ -64,12 +64,17 @@ class GameLogic {
     
     
     static func startTimer(){
+        GameViewController.progressBar.setProgress(1.0, animated: false)
         timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(decreaseProgressBar), userInfo: nil, repeats: true)
         
     }
     
     @objc static func decreaseProgressBar(){
-        GameViewController.progressBar.setProgress(GameViewController.progressBar.progress - 0.002, animated: true)
+        
+        
+        let seconds: Float = 5.0 - (0.25 * (Float(Int(score/5))))
+        let amountToSubtract: Float = 1.0 / (seconds / 0.05)
+        GameViewController.progressBar.setProgress(GameViewController.progressBar.progress - amountToSubtract, animated: true)
     }
     
     static func stopTimer(){
@@ -99,13 +104,15 @@ class GameLogic {
     
     
     static func gotCorrectColor(){
+        stopTimer()
+        
         increaseScore()
         if (score % 5) == 0 {
             GameScene.changeGradients()
         } else {
             GameScene.setColor()
         }
-        
+        startTimer()
         resetTimer()
         
         
