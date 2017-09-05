@@ -63,9 +63,17 @@ class GameLogic {
     }
     
     
-    static func startTimer(for time: Int){
+    static func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(decreaseProgressBar), userInfo: nil, repeats: true)
         
-        
+    }
+    
+    @objc static func decreaseProgressBar(){
+        GameViewController.progressBar.setProgress(GameViewController.progressBar.progress - 0.002, animated: true)
+    }
+    
+    static func stopTimer(){
+        timer.invalidate()
     }
     
     static func resetScore(){

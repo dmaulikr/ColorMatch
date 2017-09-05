@@ -235,6 +235,8 @@ class GameViewController: UIViewController {
         self.view.addSubview(GameViewController.highScore)
         self.view.addSubview(status)
         self.view.addSubview(GameViewController.progressBar)
+        
+        GameLogic.startTimer()
         //let verticalCenter = NSLayoutConstraint.init(item: status, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         //self.view.addConstraint(verticalCenter)
         
@@ -251,6 +253,8 @@ class GameViewController: UIViewController {
         }
     }
 
+    
+    
     override var shouldAutorotate: Bool {
         return false
     }
